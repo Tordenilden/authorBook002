@@ -14,7 +14,7 @@ import { IAuthor } from 'src/app/interface/iauthor';
   Prøv at populer / tilsæt data arrayet nede i en af metoderne med 2 eller 3 objekter
   */
 export class AuthorComponent implements OnInit {
-  author : IAuthor[] = [];
+  authorList : IAuthor[] = [];
   constructor() { }  //DI
 
   ngOnInit(): void { // denne metode kører når component bygges
@@ -31,8 +31,23 @@ export class AuthorComponent implements OnInit {
     console.log(authors);
   }
   buttonClick3(){
-    // fyld både id og firstname ud ellers kommer der en fejl....
-    // let authors =
-    // console.log(authors);
+    // fyld både id
+    let temp : IAuthor[] = [{authorId : 1},{authorId : 2},{authorId : 3} ];
+    this.authorList = temp;
+  }
+  buttonClick4(){
+    let temp : IAuthor[] = [
+      {firstName:"Hans"},
+      {firstName:"Thor"},
+      {firstName:"Batman"}
+    ];
+  }
+  buttonClick5(){
+    let temp : IAuthor[] = [
+      {authorId:1, firstName:"Hans"},
+      {authorId:2, firstName:"Thor"},
+      {authorId:3, firstName:"Batman"}
+    ];
+    this.authorList	= temp;
   }
 }

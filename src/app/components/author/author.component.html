@@ -1,5 +1,19 @@
 <p>author works!</p>
 
-<button (click)="buttonClick()">tryk mig</button>
-<button (click)="buttonClick2()">array 2</button>
-<button (click)="buttonClick3()">array 3</button>
+<button (click)="buttonClick3()">show id</button>
+<button (click)="buttonClick4()">show firtsname</button>
+<button (click)="buttonClick5()">show both</button>
+
+
+<div class="container">
+  <div class="list" *ngFor="let item of authorList">
+    <div class="list-item">
+      <span class="list-row">
+        <label for="">Author ID:</label>{{item.authorId}}
+      </span>
+      <span class="list-row">
+        <label for="">Author Firstname: </label>{{item.firstName}}
+      </span>
+    </div>
+  </div>
+</div>
