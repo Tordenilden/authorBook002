@@ -1,12 +1,16 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs'; // samme som Async
 import { IAuthor } from '../interface/iauthor';
 
+
+// HttpHeaders definere hvilket format vi sender i bla.
 @Injectable({
   providedIn: 'root'
 })
 export class AuthorService {
 
-  constructor() { }
+  constructor(private http:HttpClient) { }
   // getauthorById, getAuthors, createAuthor, deleteAuthor ....
   // hvad er forskellen mellem let og var
   // var er global scoped
@@ -21,7 +25,11 @@ export class AuthorService {
     ];
     return authors;
   }
-
+  url : string = "https://localhost:44378/api/Authors/Flødeboller"; // vores url til api
+  getAuthors():Observable<IAuthor[]>{
+    //console.log(this.http.get<IAuthor[]>(this.url));
+    return this.http.get<IAuthor[]>(this.url);
+  }
   // getAuthors():Observable<IAuthor[]>{
   //   return this.http.get<IAuthor[]>(this.url);
   // }

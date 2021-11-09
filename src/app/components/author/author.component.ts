@@ -20,9 +20,19 @@ export class AuthorComponent implements OnInit {
   constructor(private api:AuthorService) { }  //DI services eller moduler eller noget vodoo
 
   ngOnInit(): void { // denne metode kører når component bygges
-    this.authorList= this.api.getAuthorsHardcoded();
+    //this.authorList= this.api.getAuthorsHardcoded();
+    this.getAuthors();
+  }
+  // invokes ellers virker den ikke!!
+  getAuthors(){
+    // vi skal benytte vores authorService, så hvordan?
+    this.api.getAuthors().subscribe((data)=>{
+      console.log("vi tester lige " +data);
+  //    this.authorList = data;
+    })
   }
 
+  //#region startMethods
   // Events / Handlinger
   buttonClick(){
     // console.log("clicked");
@@ -53,4 +63,5 @@ export class AuthorComponent implements OnInit {
     ];
     this.authorList	= temp;
   }
+  //#endregion start methods
 }
