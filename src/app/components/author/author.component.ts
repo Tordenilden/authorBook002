@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { IAuthor } from 'src/app/interface/iauthor';
+import { AuthorService } from 'src/app/services/author.service';
 
 
 //Decorator , det er meta data om en class i Angular
@@ -15,9 +16,11 @@ import { IAuthor } from 'src/app/interface/iauthor';
   */
 export class AuthorComponent implements OnInit {
   authorList : IAuthor[] = [];
-  constructor() { }  //DI
+  // det der står inde i constructor er nu en property i class.
+  constructor(private api:AuthorService) { }  //DI services eller moduler eller noget vodoo
 
   ngOnInit(): void { // denne metode kører når component bygges
+    this.authorList= this.api.getAuthorsHardcoded();
   }
 
   // Events / Handlinger
