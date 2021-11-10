@@ -26,10 +26,17 @@ export class AuthorService {
     return authors;
   }
   url : string = "https://localhost:44378/api/Authors/Flødeboller"; // vores url til api
+  baseUrl : string = "https://localhost:44378/api/";
   getAuthors():Observable<IAuthor[]>{
     //console.log(this.http.get<IAuthor[]>(this.url));
     return this.http.get<IAuthor[]>(this.url);
   }
+  // https://localhost:44378/api/Authors/4
+  // https://localhost:44378/api/Authors/3
+  deleteAuthor(authorId:number):Observable<IAuthor>{
+    return this.http.delete<IAuthor>(`${this.baseUrl}Authors/${authorId}`);
+  }
+
   // getAuthors():Observable<IAuthor[]>{
   //   return this.http.get<IAuthor[]>(this.url);
   // }

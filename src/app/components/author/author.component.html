@@ -10,6 +10,8 @@
     <div class="list-item">
       <span class="list-row">
         <label for="">Author ID:</label>{{item.authorId}}
+        <button
+        (click)="deleteAuthor(item.authorId)">X</button>
       </span>
       <span class="list-row">
         <label for="">Author Firstname: </label>{{item.firstName}}
@@ -17,3 +19,10 @@
     </div>
   </div>
 </div>
+<!-- der findes mindst 6 forskellige måder at få input fra <input> -->
+<!-- #firstname kaldes en reference -->
+<input type="text" #firstname>
+<input type="number" #bla>
+<button (click)="getInput(bla.value)">omg</button>
+<button (click)="getInput(firstname.value)">rofl</button>
+<!-- <input type="text" ngModel name = "knud" > -->
