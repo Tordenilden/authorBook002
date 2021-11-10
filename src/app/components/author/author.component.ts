@@ -23,12 +23,30 @@ export class AuthorComponent implements OnInit {
     //this.authorList= this.api.getAuthorsHardcoded();
     this.getAuthors();
   }
+
+  getInput(firstName: string){
+    console.log(firstName);
+
+  }
+  deleteAuthor(Id:number){
+
+    this.api.deleteAuthor(Id).subscribe(); // tjek på om det gik igennem
+    let foundAuthor = this.authorList.findIndex(({authorId})=> authorId == Id);
+    this.authorList.splice(foundAuthor,1);
+  }
+
+// ALTERNATIVT TIL DEN DELETE VI HAR LAVET KAN VI GETAUTHORS IGEN OFC.
+// BUT I DONT LIKE IT
+// VI STARTER LIGE MED GITHUB BAGEFTER
+// BAGEFTER CREATE AUTHOR MM.
+
+
   // invokes ellers virker den ikke!!
   getAuthors(){
     // vi skal benytte vores authorService, så hvordan?
     this.api.getAuthors().subscribe((data)=>{
       console.log("vi tester lige " +data);
-  //    this.authorList = data;
+     this.authorList = data;
     })
   }
 
@@ -49,11 +67,11 @@ export class AuthorComponent implements OnInit {
     this.authorList = temp;
   }
   buttonClick4(){
-    let temp : IAuthor[] = [
-      {firstName:"Hans"},
-      {firstName:"Thor"},
-      {firstName:"Batman"}
-    ];
+    // let temp : IAuthor[] = [
+    //   {firstName:"Hans"},
+    //   {firstName:"Thor"},
+    //   {firstName:"Batman"}
+    // ];
   }
   buttonClick5(){
     let temp : IAuthor[] = [
