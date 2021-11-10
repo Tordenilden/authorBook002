@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { IAuthor } from 'src/app/interface/iauthor';
 import { AuthorService } from 'src/app/services/author.service';
 
-
+//#region gone
 //Decorator , det er meta data om en class i Angular
 @Component({
   selector: 'app-author', // den måde vi tilgår vores component
@@ -14,17 +15,25 @@ import { AuthorService } from 'src/app/services/author.service';
   prøv at lave en variabel (array) af Interface IAuthor og importer det
   Prøv at populer / tilsæt data arrayet nede i en af metoderne med 2 eller 3 objekter
   */
+ //#endregion gone
 export class AuthorComponent implements OnInit {
   authorList : IAuthor[] = [];
   author : IAuthor = {} as IAuthor; // skal caste hvis ikke alle er nullable
   // det der står inde i constructor er nu en property i class.
+
+  //HTML FORMS
+  authorForm = new FormGroup({
+    firstName : new FormControl('')
+  });
+
+
   constructor(private api:AuthorService) { }  //DI services eller moduler eller noget vodoo
 
   ngOnInit(): void { // denne metode kører når component bygges
     //this.authorList= this.api.getAuthorsHardcoded();
     this.getAuthors();
-    this.author = {firstName: "Ida"};
-    this.createAuthor(this.author);
+    // this.author = {firstName: "Ida"};
+    // this.createAuthor(this.author);
     console.log("virker det");
 
   }
@@ -48,8 +57,13 @@ export class AuthorComponent implements OnInit {
       // bliver opdateret med de nye data :)
       this.authorList.push(data); // får vi PK med
       //this.authorList.push(authorObj); // uden PK med
-
+// ER DET refresh eller hvad? find ud af
+//det til imorgen (lektioer)
     })
+  }
+  submitForm(temp:any){
+    console.log(temp);
+
   }
 // ALTERNATIVT TIL DEN DELETE VI HAR LAVET KAN VI GETAUTHORS IGEN OFC.
 // BUT I DONT LIKE IT

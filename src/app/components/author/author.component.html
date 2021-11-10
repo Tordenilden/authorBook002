@@ -26,3 +26,10 @@
 <button (click)="getInput(bla.value)">omg</button>
 <button (click)="getInput(firstname.value)">rofl</button>
 <!-- <input type="text" ngModel name = "knud" > -->
+
+<form [formGroup]="authorForm" >
+<label for="">indtast navn</label>
+<input type="text" formControlName="firstName">
+<button type="submit" (click)="submitForm(authorForm.value)">submitForm</button>
+<button type="submit" (click)="createAuthor(authorForm.value)">createAuthor</button>
+</form>
