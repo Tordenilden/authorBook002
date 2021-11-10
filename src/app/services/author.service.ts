@@ -3,6 +3,11 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs'; // samme som Async
 import { IAuthor } from '../interface/iauthor';
 
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type' : 'application/json'
+  })
+}
 
 // HttpHeaders definere hvilket format vi sender i bla.
 @Injectable({
@@ -37,6 +42,10 @@ export class AuthorService {
     return this.http.delete<IAuthor>(`${this.baseUrl}Authors/${authorId}`);
   }
 
+  createAuthor(authorToPost:IAuthor):Observable<IAuthor>{
+    return this.http.post<IAuthor>(`${this.baseUrl}Authors`
+    ,authorToPost,httpOptions);
+  }
   // getAuthors():Observable<IAuthor[]>{
   //   return this.http.get<IAuthor[]>(this.url);
   // }

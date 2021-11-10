@@ -16,12 +16,17 @@ import { AuthorService } from 'src/app/services/author.service';
   */
 export class AuthorComponent implements OnInit {
   authorList : IAuthor[] = [];
+  author : IAuthor = {} as IAuthor; // skal caste hvis ikke alle er nullable
   // det der står inde i constructor er nu en property i class.
   constructor(private api:AuthorService) { }  //DI services eller moduler eller noget vodoo
 
   ngOnInit(): void { // denne metode kører når component bygges
     //this.authorList= this.api.getAuthorsHardcoded();
     this.getAuthors();
+    this.author = {firstName: "Ida"};
+    this.createAuthor(this.author);
+    console.log("virker det");
+
   }
 
   getInput(firstName: string){
@@ -34,7 +39,18 @@ export class AuthorComponent implements OnInit {
     let foundAuthor = this.authorList.findIndex(({authorId})=> authorId == Id);
     this.authorList.splice(foundAuthor,1);
   }
+  createAuthor(authorObj : IAuthor){
+    console.log(authorObj);
 
+    this.api.createAuthor(authorObj).subscribe(data =>{
+      console.log(data);
+      // kunne være fedt når det findes i databasen at vores authorList
+      // bliver opdateret med de nye data :)
+      this.authorList.push(data); // får vi PK med
+      //this.authorList.push(authorObj); // uden PK med
+
+    })
+  }
 // ALTERNATIVT TIL DEN DELETE VI HAR LAVET KAN VI GETAUTHORS IGEN OFC.
 // BUT I DONT LIKE IT
 // VI STARTER LIGE MED GITHUB BAGEFTER
@@ -43,9 +59,13 @@ export class AuthorComponent implements OnInit {
 
   // invokes ellers virker den ikke!!
   getAuthors(){
+    console.log("testing");
     // vi skal benytte vores authorService, så hvordan?
     this.api.getAuthors().subscribe((data)=>{
-      console.log("vi tester lige " +data);
+
+      console.log(data);
+
+      //console.log("vi tester lige " +data);
      this.authorList = data;
     })
   }
